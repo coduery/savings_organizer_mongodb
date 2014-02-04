@@ -1,4 +1,11 @@
 SavingsOrganizer::Application.routes.draw do
+
+  root "users#login" # specifes default web page for application
+
+  get "users/login"
+  get "users/registration"
+  get "users/welcome"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

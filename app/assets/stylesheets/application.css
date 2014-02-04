@@ -11,3 +11,34 @@
  *= require_self
  *= require_tree .
  */
+
+body {
+	background-color: #E6E6FA;
+	font-family: arial, sans-serif;
+	font-size: medium;
+	text-align: center;
+}
+
+div {
+	font-size: small;
+}
+
+.button {
+	width: 80px;
+	padding: 2px 0 2px 0;
+	margin: 0 10px 0 10px;
+	border-color: #000000;
+}
+
+.button:hover {
+	background-color: #B0C4DE;
+}
+
+#main_layout {
+	text-align: center;
+}
+
+#left_layout {
+	display: inline-block;
+	text-align: left;
+}
