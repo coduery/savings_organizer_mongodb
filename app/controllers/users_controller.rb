@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 
   def login
-    if request.get?
-      # display login page
+    if request.get? # display login page
+      flash[:alert] = nil
     elsif request.post?
       username = params[:username]
       user = User.find_by user_name: "#{username}"
@@ -18,8 +18,8 @@ class UsersController < ApplicationController
   end
 
   def registration
-  	if request.get?
-      # display registration page
+  	if request.get? # display registration page
+      flash[:alert] = nil
 	  elsif request.post?
 
       user = User.new(:user_name  => params[:new_username],
