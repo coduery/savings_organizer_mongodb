@@ -2,22 +2,29 @@
 
 <h2>New User Registration</h2>
 
+<% if flash[:alert] %>
+  <div id="error_notice">
+    <h3><%= flash[:alert] %></h3>
+  </div>
+<% end %>
+
 <div id="main_layout">
-  <form action="users/register" method="post">
+
+  <%= form_tag("/users/registration") do -%>
     <div id="left_layout">
         New Username:<br>
-        <input type="text" name="new_username"><br><br>
+        <%= text_field_tag "new_username" %><br><br>
         Password:<br>
-        <input type="password" name="new_password"><br><br>
+        <%= password_field_tag "new_password" %><br><br>
         Confirm Password:<br>
-        <input type="password" name="new_password_confirm"><br><br>
+        <%= password_field_tag "new_password_confirm" %><br><br>
         Email Address:<br>
-        <input type="text" name="email_address"><br><br><br>
+        <%= text_field_tag "email_address" %><br><br><br>
     </div>
 
     <div id="bottom_layout">
-      <input class="button" type="submit" value="Submit">
+      <%= submit_tag "Submit", class: "button" %>
       <button class="button" onclick="location.href='/users/login'; return false;">Cancel</button>
     </div>
-  </form> 
+  <% end -%>
 </div>

@@ -2,18 +2,31 @@
 
 <h2>User Login</h2>
 
+<% if flash[:alert] %>
+  <div id="error_notice">
+    <h3><%= flash[:alert] %></h3>
+  </div>
+<% end %>
+
+<% if flash[:notice] %>
+  <div id="success_notice">
+    <h3><%= flash[:notice] %></h3>
+  </div>
+<% end %>
+
 <div id="main_layout">
-  <form action="users/welcome" method="post">
+
+  <%= form_tag("/users/login") do -%>
     <div id="left_layout">
-        Username:<br>
-        <input type="text" name="username"><br><br>
-        Password:<br>
-        <input type="password" name="password"><br><br><br>
+      Username:<br>
+      <%= text_field_tag "username" %><br><br>
+      Password:<br>
+      <%= password_field_tag "password" %><br><br><br>
     </div>
 
     <div id="bottom_layout">
-      <input class="button" type="submit" value="Login">
+      <%= submit_tag "Login", class: "button" %>
       <button class="button" onclick="location.href='/users/registration'; return false;">Register</button>
     </div>
-  </form> 
+  <% end -%>
 </div>

@@ -1,2 +1,16 @@
-<h1>Users#welcome</h1>
-<p>Find me in app/views/users/welcome.html.erb</p>
+<% provide(:title, "Welcome") %>
+
+<h2>Welcome <%= session[:user][:user_name] %></h2>
+
+<% if flash[:notice] %>
+  <div id="success_notice">
+    <h3><%= flash[:notice] %></h3>
+  </div>
+<% end %>
+
+<div id="main_layout">
+
+
+
+
+</div>

@@ -42,3 +42,11 @@ div {
 	display: inline-block;
 	text-align: left;
 }
+
+#error_notice {
+	color: #FF0000;
+}
+
+#success_notice {
+	color: #008000;
+}
