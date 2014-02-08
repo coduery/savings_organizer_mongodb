@@ -22,16 +22,17 @@ class UsersController < ApplicationController
       flash[:alert] = nil
 	  elsif request.post?
 
-      user = User.new(:user_name  => params[:new_username],
-                      :password   => params[:new_password],
-                      :user_email => params[:email_address])
-
-      if user.is_valid?(params)       
+      user = User.new(:user_name  => params[:user_name],
+                      :password   => params[:password],
+                      :password_confirmation => params[:password_confirmation],
+                      :user_email => params[:user_email])
+    
+      if user.valid?
         user.save
-        flash[:notice] = "#{user.message}"
+        flash[:notice] = "Registration Successful. Please Login!"
         redirect_to root_url
       else
-        flash[:alert] = "#{user.message}"
+        flash[:alert] = user.errors.first[1]
       end
 
   	end	

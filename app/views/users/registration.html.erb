@@ -13,13 +13,13 @@
   <%= form_tag("/users/registration") do -%>
     <div id="left_layout">
         New Username:<br>
-        <%= text_field_tag "new_username" %><br><br>
+        <%= text_field_tag :user_name %><br><br>
         Password:<br>
-        <%= password_field_tag "new_password" %><br><br>
+        <%= password_field_tag :password %><br><br>
         Confirm Password:<br>
-        <%= password_field_tag "new_password_confirm" %><br><br>
+        <%= password_field_tag :password_confirmation %><br><br>
         Email Address:<br>
-        <%= text_field_tag "email_address" %><br><br><br>
+        <%= text_field_tag :user_email %><br><br><br>
     </div>
 
     <div id="bottom_layout">
