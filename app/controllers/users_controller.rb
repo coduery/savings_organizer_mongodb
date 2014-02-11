@@ -7,7 +7,7 @@ class UsersController < ApplicationController
       username = params[:username]
       user = User.find_by user_name: "#{username}"
       if !user.nil? && (user.authenticate? user, params)
-        flash[:notice] = "#{user.message}"
+        flash[:notice] = "Login Successful."
         session[:user] = user
         redirect_to "/users/welcome"
       else
@@ -22,10 +22,10 @@ class UsersController < ApplicationController
       flash[:alert] = nil
 	  elsif request.post?
 
-      user = User.new(:user_name  => params[:user_name],
-                      :password   => params[:password],
+      user = User.new(:user_name             => params[:user_name],
+                      :password              => params[:password],
                       :password_confirmation => params[:password_confirmation],
-                      :user_email => params[:user_email])
+                      :user_email            => params[:user_email])
     
       if user.valid?
         user.save

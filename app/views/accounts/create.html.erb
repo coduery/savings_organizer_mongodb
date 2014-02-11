@@ -1,0 +1,34 @@
+<% provide(:title, "Create Account") %>
+
+<h2>Create Savings Account</h2>
+
+<% if flash[:alert] %>
+  <div id="error_notice">
+    <h3><%= flash[:alert] %></h3>
+  </div>
+<% end %>
+
+<% if flash[:notice] %>
+  <div id="success_notice">
+    <h3><%= flash[:notice] %></h3>
+  </div>
+<% end %>
+
+<div id="main_layout">
+
+  <%= render "shared/menu" %>
+
+  <div id="center_private_layout">
+
+    <%= form_tag("/accounts/create") do -%>
+      <div id="center_public_layout">
+        Account Name:<br>
+        <%= text_field_tag "account_name", nil, class: "text_field" %><br><br>
+      </div>
+
+      <div id="bottom_layout">
+        <%= submit_tag "Submit", class: "button" %>
+      </div>
+    <% end -%>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 <% provide(:title, "Welcome") %>
 
-<h2>Welcome <%= session[:user][:user_name] %></h2>
+<h2>Welcome <%= session[:user][:user_name] %>!</h2>
 
 <% if flash[:notice] %>
   <div id="success_notice">
@@ -10,7 +10,26 @@
 
 <div id="main_layout">
 
+  <%= render "shared/menu" %>
 
+  <div id="center_private_layout">
+
+    <span class="span_left_align">Select Savings Account:</span>
+    <span class="span_right_align"><%= select_tag "select_account", "<option>Primary Savings</option>".html_safe %></span><br><br>
+
+    <span class="span_left_align">Current Savings Amount:</span>
+    <span class="span_right_align"><%= label_tag "savings_amount", nil, class: "display_item" %></span><br><br>
+
+    <span class="span_left_align">Number of Saving Categories:</span>
+    <span class="span_right_align"><%= label_tag "number_categories", nil, class: "display_item" %></span><br><br>
+
+    <span class="span_left_align">Last Entry Date:</span>
+    <span class="span_right_align"><%= label_tag "last_entry_date", nil, class: "display_item" %></span><br><br>
+
+    <span class="span_left_align">Last Entry Amount:</span>
+    <span class="span_right_align"><%= label_tag "last_entry_amount", nil, class: "display_item" %></span><br><br>
+
+  </div>
 
 
 </div>

@@ -11,15 +11,15 @@
 <div id="main_layout">
 
   <%= form_tag("/users/registration") do -%>
-    <div id="left_layout">
+    <div id="center_public_layout">
         New Username:<br>
-        <%= text_field_tag :user_name %><br><br>
+        <%= text_field_tag :user_name, nil, class: "text_field" %><br><br>
         Password:<br>
-        <%= password_field_tag :password %><br><br>
+        <%= password_field_tag :password, nil, class: "text_field" %><br><br>
         Confirm Password:<br>
-        <%= password_field_tag :password_confirmation %><br><br>
+        <%= password_field_tag :password_confirmation, nil, class: "text_field" %><br><br>
         Email Address:<br>
-        <%= text_field_tag :user_email %><br><br><br>
+        <%= text_field_tag :user_email, nil, class: "text_field" %><br><br><br>
     </div>
 
     <div id="bottom_layout">

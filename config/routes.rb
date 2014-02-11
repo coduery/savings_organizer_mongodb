@@ -5,8 +5,10 @@ SavingsOrganizer::Application.routes.draw do
   get "users/login"
   get "users/registration"
   get "users/welcome"
+  get "accounts/create"
 
   post "users/login"
   post "users/registration"
+  post "accounts/create"
 
 end
