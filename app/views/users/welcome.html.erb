@@ -15,7 +15,7 @@
   <div id="center_private_layout">
 
     <span class="span_left_align">Select Savings Account:</span>
-    <span class="span_right_align"><%= select_tag "select_account", "<option>Primary Savings</option>".html_safe %></span><br><br>
+    <span class="span_right_align"><%= select_tag "account_name", options_for_select(session[:account_names]) %></span><br><br>
 
     <span class="span_left_align">Current Savings Amount:</span>
     <span class="span_right_align"><%= label_tag "savings_amount", nil, class: "display_item" %></span><br><br>
@@ -30,6 +30,4 @@
     <span class="span_right_align"><%= label_tag "last_entry_amount", nil, class: "display_item" %></span><br><br>
 
   </div>
-
-
 </div>

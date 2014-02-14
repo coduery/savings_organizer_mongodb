@@ -40,6 +40,8 @@ class UsersController < ApplicationController
 
   def welcome
     if !session[:user].nil?
+      user_id = session[:user][:id]
+      session[:account_names] = AccountsHelper.get_accounts user_id
       # display welcome page
     else
       redirect_to "/users/login"

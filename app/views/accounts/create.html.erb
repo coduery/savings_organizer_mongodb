@@ -22,12 +22,13 @@
 
     <%= form_tag("/accounts/create") do -%>
       <div id="center_public_layout">
-        Account Name:<br>
+        * Account Name:<br>
         <%= text_field_tag "account_name", nil, class: "text_field" %><br><br>
       </div>
 
       <div id="bottom_layout">
-        <%= submit_tag "Submit", class: "button" %>
+        <span class="span_left_align">* - Required Entry</span>
+        <span class="span_right_align"><%= submit_tag "Submit", class: "button" %></span>
       </div>
     <% end -%>
   </div>
