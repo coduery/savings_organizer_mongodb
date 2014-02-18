@@ -12,7 +12,7 @@ class CategoriesController < ApplicationController
 
       if !session[:user].nil?
         user_id = session[:user][:id]
-        session[:account_names] = AccountsHelper.get_accounts user_id
+        session[:account_names] = AccountsHelper.get_account_names user_id
         # display create category page
       else
         redirect_to "/users/login"

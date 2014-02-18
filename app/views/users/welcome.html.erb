@@ -14,14 +14,14 @@
 
   <div id="center_private_layout">
 
-    <span class="span_left_align">Select Savings Account:</span>
+    <span class="span_left_align">Selected Savings Account:</span>
     <span class="span_right_align"><%= select_tag "account_name", options_for_select(session[:account_names]) %></span><br><br>
 
-    <span class="span_left_align">Current Savings Amount:</span>
-    <span class="span_right_align"><%= label_tag "savings_amount", nil, class: "display_item" %></span><br><br>
-
     <span class="span_left_align">Number of Saving Categories:</span>
-    <span class="span_right_align"><%= label_tag "number_categories", nil, class: "display_item" %></span><br><br>
+    <span class="span_right_align"><%= label_tag "number_categories", session[:number_of_catagories], class: "display_item" %></span><br><br>
+
+    <span class="span_left_align">Current Savings Amount:</span>
+    <span class="span_right_align"><%= label_tag "savings_amount", nil, class: "display_item" %></span><br><br>    
 
     <span class="span_left_align">Last Entry Date:</span>
     <span class="span_right_align"><%= label_tag "last_entry_date", nil, class: "display_item" %></span><br><br>

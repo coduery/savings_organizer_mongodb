@@ -13,16 +13,26 @@ module CategoriesHelper
   end
 
   def self.does_category_exist?(user_id, account_name, category_name)
-    user_accounts = Account.where("user_id = ? AND account_name = ?", 
-                                   user_id, account_name)
-    if user_accounts.size > 0
-      account = user_accounts.first
-      account_id = account[:id]
+    account_id = AccountsHelper.get_account_id(user_id, account_name)
+
+    if !account_id.nil?
       account_categories = Category.where("account_id = ? AND category_name = ?",
                                           account_id, category_name)
+    else
+      account_categories = []
     end
 
-    account_categories.size > 0
+    !account_categories.empty?
+  end
+
+  def self.get_categories(user_id, account_name)
+    account_id = AccountsHelper.get_account_id(user_id, account_name)
+
+    if !account_id.nil?
+      account_categories = Category.where("account_id = ?", account_id)
+    else
+      account_categories = []
+    end
   end
 
 end

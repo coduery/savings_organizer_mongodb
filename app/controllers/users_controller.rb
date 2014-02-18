@@ -41,7 +41,11 @@ class UsersController < ApplicationController
   def welcome
     if !session[:user].nil?
       user_id = session[:user][:id]
-      session[:account_names] = AccountsHelper.get_accounts user_id
+      account_names = AccountsHelper.get_account_names user_id
+      account_name = account_names.first
+      number_of_catagories = CategoriesHelper.get_categories(user_id, account_name).size
+      session[:account_names] = account_names
+      session[:number_of_catagories] = number_of_catagories
       # display welcome page
     else
       redirect_to "/users/login"
