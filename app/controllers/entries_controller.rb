@@ -49,7 +49,7 @@ class EntriesController < ApplicationController
             end
             flash.now[:notice] = "Entries Added Successfully!"
           elsif flash.now[:alert].nil?
-            flash.now[:alert] = "Entries cannot all be blank or zero!"
+            flash.now[:alert] = "Entries cannot all be blank!"
           end
         end
       else 
