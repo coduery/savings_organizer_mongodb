@@ -44,7 +44,7 @@ div {
   font-size: inherit;
   height: 20px;
   margin: 4px 0 0 4px;
-  background-color: dodgerblue;  /* For diagnostics only */
+  /* background-color: dodgerblue; */  /* For diagnostics only */
 }
 
 .span_right_align {
@@ -52,7 +52,7 @@ div {
   font-size: inherit;
   height: 20px;
   margin: 4px 4px 0 0;
-  background-color: magenta;  /* For diagnostics only */  
+  /* background-color: magenta; */  /* For diagnostics only */  
 }
 
 .dollar_text_field {
@@ -66,7 +66,7 @@ div {
   height: 600px;
   width: 625px;
   text-align: center;
-  background-color: pink;  /* For diagnostics only */
+  /* background-color: pink; */  /* For diagnostics only */
 }
 
 #left_menu {
@@ -76,7 +76,7 @@ div {
   width: 150px;
   text-align: left;
   font-size: medium;
-  background-color: yellow;  /* For diagnostics only */
+  /* background-color: yellow; */  /* For diagnostics only */
 }
 
 #center_private_layout {
@@ -85,7 +85,7 @@ div {
   text-align: left;
   margin: 20px 0 0 0;
   width: 400px;
-  background-color: lightskyblue;  /* For diagnostics only */
+  /* background-color: lightskyblue; */  /* For diagnostics only */
 }
 
 #center_public_layout {
@@ -93,12 +93,12 @@ div {
   text-align: left;
   font-size: inherit;
   margin: 20px 0 0 0;
-  background-color: greenyellow;  /* For diagnostics only */
+  /* background-color: greenyellow; */  /* For diagnostics only */
 }
 
 #bottom_layout {
   clear: both;
-  background-color: peru;  /* For diagnostics only */
+  /* background-color: peru; */  /* For diagnostics only */
 }
 
 #error_notice {
