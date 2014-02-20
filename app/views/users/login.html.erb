@@ -16,7 +16,7 @@
 
 <div id="main_layout">
 
-  <%= form_tag("/users/login") do -%>
+  <%= form_tag(users_login_path) do -%>
     <div id="center_public_layout">
       Username:<br>
       <%= text_field_tag "username", nil, class: "text_field" %><br><br>

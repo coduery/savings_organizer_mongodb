@@ -20,7 +20,7 @@
 
   <div id="center_private_layout">
 
-    <%= form_tag("/accounts/create") do -%>
+    <%= form_tag(accounts_create_path) do -%>
       <div id="center_public_layout">
         * Account Name:<br>
         <%= text_field_tag "account_name", nil, class: "text_field" %><br><br>

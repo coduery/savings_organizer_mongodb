@@ -19,9 +19,4 @@ class User < ActiveRecord::Base
     length:   { maximum: 40, too_long: "Email too long.  
                                       Maximum %{count} characters allowed!" }
 
-
-  def authenticate?(user, attributes)
-    user[:password] == attributes[:password]
-  end
-
 end

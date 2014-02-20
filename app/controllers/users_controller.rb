@@ -1,18 +1,21 @@
 class UsersController < ApplicationController
 
+  attr_reader :user_name, :account_names, :number_of_catagories
+
   def login
     if request.get? # display login page
       flash[:alert] = nil
     elsif request.post?
       username = params[:username]
       user = User.find_by user_name: "#{username}"
-      if !user.nil? && (user.authenticate? user, params)
+    if !user.nil? && (UsersHelper.authenticate? user, params)
         flash[:notice] = "Login Successful."
-        session[:user] = user
-        redirect_to "/users/welcome"
+        session[:current_user_id] = user[:id]
+        session[:account_name] = AccountsHelper.get_account_names(user[:id]).first
+        redirect_to users_welcome_url
       else
         flash[:alert] = "Credentials Invalid. Please try again!"
-        session[:user] = nil
+        session[:current_user_id] = nil
       end
     end
   end
@@ -39,16 +42,25 @@ class UsersController < ApplicationController
   end
 
   def welcome
-    if !session[:user].nil?
-      user_id = session[:user][:id]
-      account_names = AccountsHelper.get_account_names user_id
-      account_name = account_names.first
-      number_of_catagories = CategoriesHelper.get_categories(user_id, account_name).size
-      session[:account_names] = account_names
-      session[:number_of_catagories] = number_of_catagories
-      # display welcome page
-    else
-      redirect_to "/users/login"
+    if request.get? || request.post?
+      if !session[:current_user_id].nil?  # display welcome page
+        user_id = session[:current_user_id]
+        @user_name = UsersHelper.get_user_name(user_id)
+        @account_names = AccountsHelper.get_account_names user_id
+
+        if session[:account_name].nil? && request.get?
+          account_name = @account_names.first
+        elsif request.get?
+          account_name = session[:account_name]
+        elsif request.post?
+          account_name = params[:account_name]
+          session[:account_name] = account_name
+        end
+
+        @number_of_catagories = CategoriesHelper.get_categories(user_id, account_name).size
+      else
+        redirect_to users_login_url
+      end
     end
   end
 

@@ -55,9 +55,15 @@ div {
   background-color: magenta;  /* For diagnostics only */  
 }
 
+.dollar_text_field {
+  width: 150px;
+  height: 18px;
+  text-align: right;
+}
+
 #main_layout {
   display: inline-block;
-  height: 400 px;
+  height: 600px;
   width: 625px;
   text-align: center;
   background-color: pink;  /* For diagnostics only */
@@ -66,8 +72,8 @@ div {
 #left_menu {
   float: left;
   margin: 25px 50px 25px 25px;
-  height: 400 px;
-  width: 150 px;
+  height: 400px;
+  width: 150px;
   text-align: left;
   font-size: medium;
   background-color: yellow;  /* For diagnostics only */
@@ -105,4 +111,8 @@ div {
 
 #select_account {
   font-size: 95%;
+}
+
+#highlight_text {
+  background-color: #FFFF00
 }

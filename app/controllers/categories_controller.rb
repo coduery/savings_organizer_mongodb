@@ -1,25 +1,22 @@
 class CategoriesController < ApplicationController
 
+  attr_reader :account_names, :category_name, 
+              :savings_goal_month, :savings_goal_day, :savings_goal_year
+
   def create
     if request.get?
 
-      session[:account_name] = nil
-      session[:category_name] = nil
-      # TODO: see notes at bottom of file
-      # session[:savings_goal_month] = nil
-      # session[:savings_goal_day] = nil
-      # session[:savings_goal_year] = nil
-
-      if !session[:user].nil?
-        user_id = session[:user][:id]
-        session[:account_names] = AccountsHelper.get_account_names user_id
-        # display create category page
+      if !session[:current_user_id].nil? # display create category page
+        user_id = session[:current_user_id]
+        @account_names = AccountsHelper.get_account_names user_id
+        @category_name = nil
       else
-        redirect_to "/users/login"
+        redirect_to users_login_url
       end
 
     elsif request.post?
-      user_id = session[:user][:id]
+      user_id = session[:current_user_id]
+      @account_names = AccountsHelper.get_account_names user_id
       account = Account.find_by(account_name: params[:account_name], user_id: user_id )
       date_valid = CategoriesHelper.is_date_valid? params
       goal_entry_valid = CategoriesHelper.is_goal_entry_valid?(params, date_valid)
@@ -27,14 +24,13 @@ class CategoriesController < ApplicationController
       if !account
         flash.now[:alert] = "Savings account must be created prior to adding a category!"
       elsif CategoriesHelper.does_category_exist?(user_id, params[:account_name], params[:category_name])
-        session[:account_name] = params[:account_name]
         flash.now[:alert] = "Category Name Already Exists!"
       elsif goal_entry_valid
 
         if date_valid
           savings_goal_date = Date.civil(params[:savings_goal_date]["date_components(1i)"].to_i,
-                              params[:savings_goal_date]["date_components(2i)"].to_i,
-                              params[:savings_goal_date]["date_components(3i)"].to_i)
+                                         params[:savings_goal_date]["date_components(2i)"].to_i,
+                                         params[:savings_goal_date]["date_components(3i)"].to_i)
         end
 
         category = Category.new(:category_name     => params[:category_name], 
@@ -50,14 +46,11 @@ class CategoriesController < ApplicationController
         end
 
       elsif date_valid
-        session[:account_name] = params[:account_name]
-        session[:category_name] = params[:category_name]
-        # TODO: Ran into session cookie 4KB space limitation when trying to do below. Need to use hidden fields or change session store?
-        # session[:savings_goal_month] = params[:savings_goal_date]["date_components(2i)"].to_i
-        # session[:savings_goal_day] = params[:savings_goal_date]["date_components(3i)"].to_i
-        # session[:savings_goal_year] = params[:savings_goal_date]["date_components(1i)"].to_i
+        @category_name = params[:category_name]
         flash.now[:alert] = "Goal amount required with goal date!"
       end
+
+      session[:account_name] = params[:account_name]
     end    
   end
 

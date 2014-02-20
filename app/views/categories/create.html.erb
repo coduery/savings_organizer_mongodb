@@ -20,22 +20,21 @@
 
   <div id="center_private_layout">
 
-    <%= form_tag("/categories/create") do -%>
+    <%= form_tag(categories_create_path) do -%>
 
-      <span class="span_left_align">* Select Savings Account:</span>
-      <span class="span_right_align"><%= select_tag "account_name", options_for_select(session[:account_names], session[:account_name]) %></span><br><br>
+      <span class="span_left_align">* Selected Savings Account:</span>
+      <span class="span_right_align"><%= select_tag "account_name", options_for_select(@account_names, session[:account_name]) %></span><br><br>
 
       <span class="span_left_align">* Category Name:</span>
-      <span class="span_right_align"><%= text_field_tag "category_name", session[:category_name], class: "text_field" %></span><br><br>
+      <span class="span_right_align"><%= text_field_tag "category_name", @category_name, class: "text_field" %></span><br><br>
 
       <span class="span_left_align">Dollar Goal Amount:</span>
-      <span class="span_right_align"><%= text_field_tag "savings_goal", nil, class: "text_field" %></span><br><br>
+      <span class="span_right_align">$<%= text_field_tag "savings_goal", nil, class: "dollar_text_field" %></span><br><br>
 
       <span class="span_left_align">Goal Date:</span>
       <span class="span_right_align"><%= date_select :savings_goal_date, :date_components, 
-        { start_year: Time.now.year, end_year: Time.now.year + 10, use_short_month: true, order: [:month, :day, :year],
-          include_blank: true}, default: { :month => session[:savings_goal_month], :day => session[:savings_goal_day], 
-          :year => session[:savings_goal_year] } %>
+        { start_year: Time.now.year, end_year: Time.now.year + 10, use_short_month: true, 
+          order: [:month, :day, :year], include_blank: true } %>
       </span><br><br>
 
       <div id="bottom_layout">

@@ -1,6 +1,7 @@
 class Category < ActiveRecord::Base
 
   belongs_to :account
+  has_many :entries
 
   validates :category_name, 
     presence: { message: "Category Name is Required!" },
