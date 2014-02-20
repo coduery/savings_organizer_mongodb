@@ -15,4 +15,5 @@
 //= require turbolinks
 //= require_tree .
 
-/entries
+//= require_self
+//= require 'entries'
