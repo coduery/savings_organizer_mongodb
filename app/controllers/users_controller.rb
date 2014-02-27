@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
 
-  attr_reader :user_name, :account_names, :number_of_catagories
-
   def login
     if request.get? # display login page
       flash[:alert] = nil
@@ -57,7 +55,15 @@ class UsersController < ApplicationController
           session[:account_name] = account_name
         end
 
-        @number_of_catagories = CategoriesHelper.get_categories(user_id, account_name).size
+        @account_total = 
+          AccountsHelper.get_account_total(user_id, account_name)
+        @number_of_catagories = 
+          CategoriesHelper.get_categories(user_id, account_name).size
+        @number_of_entries = 
+          EntriesHelper.get_number_of_entries(user_id, account_name)
+        last_entry = EntriesHelper.get_last_entry(user_id, account_name)
+        @last_entry_date = last_entry[0]
+        @last_entry_amount = last_entry[1]
       else
         redirect_to users_login_url
       end

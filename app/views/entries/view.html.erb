@@ -1,0 +1,93 @@
+<% provide(:title, "View Entries") %>
+
+<h2>View Savings Entries</h2>
+
+<% if flash[:alert] %>
+  <div id="error_notice">
+    <h3><%= flash[:alert] %></h3>
+  </div>
+<% end %>
+
+<% if flash[:notice] %>
+  <div id="success_notice">
+    <h3><%= flash[:notice] %></h3>
+  </div>
+<% end %>
+
+<div id="main_layout">
+
+  <%= render "shared/menu" %>
+
+  <div id="center_private_layout">
+
+    <span class="span_left_align">* Selected Savings Account:</span>
+    <span class="span_right_align"><%= select_tag "account_name", options_for_select(@account_names, session[:account_name]) %></span><br><br>
+
+    <table class="entries_table">
+      <tr>
+        <th class="entries_columns">Date</th>
+        <% @category_names.each do |category_name| %>
+          <th class="entries_columns"><%= category_name %></th>
+        <% end %>
+        <th class="entries_columns">Total</th>
+      </tr>
+
+
+      <% last_entry_date = nil %>
+      <% last_created_date = nil %>
+      <% create_new_table_row = !nil %>
+
+
+
+      <% @entries.each do |entry| %>
+
+        <% if (last_entry_date == nil || last_entry_date != entry[:entry_date]) &&
+               last_created_date == nil || last_created_date != entry[:created_at].to_i %>
+          <% last_entry_date = entry[:entry_date] %>
+          <% last_created_date = entry[:created_at].to_i %>
+          <% create_new_table_row = !nil %>
+        <% else %>
+          <% create_new_table_row = nil %>
+        <% end %>
+
+        <% if !create_new_table_row.nil? %>
+          <tr>
+            <td><%= entry[:entry_date].strftime("%-m/%-d/%Y") %></td>
+
+        <% end %>
+
+            
+            <% count = 0 %>
+            <% @category_names.each do |category_name| %>
+              <% if entry[:category_id] ==  @category_name_id_mapping[category_name] %>
+                <td><span class="span_right_align_table">$&nbsp<%= number_with_precision(entry[:entry_amount], precision: 2) %></span></td>
+
+                <% break %>
+              <% else %>
+                <td><span class="span_right_align_table">-</span></td>
+
+              <% end %>
+
+              <% count += 1 %>
+            <% end %>
+
+            <%# if count == @category_names.size %>
+              <%#<td><span class="span_right_align_table">-</span></td>%>
+            <%# end %>
+
+
+        <% if create_new_table_row.nil? %>
+            <td>total</td>
+          </tr>
+          
+          <%# create_new_table_row = nil %>
+
+        <% end %>
+
+      <% end %>
+
+    </table>
+
+  </div>
+
+</div>

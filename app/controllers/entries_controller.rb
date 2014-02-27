@@ -59,13 +59,33 @@ class EntriesController < ApplicationController
     end  
   end
 
+  def view
+    if request.get?
+      if !session[:current_user_id].nil?
+        user_id = session[:current_user_id]
+        @account_names = AccountsHelper.get_account_names user_id
+        @category_names = CategoriesHelper.get_category_names(user_id, session[:account_name])
+        @entries = EntriesHelper.get_entries(user_id, session[:account_name])
+        @category_name_id_mapping = EntriesHelper.get_category_name_id_mapping(user_id, session[:account_name])
+
+        print "\n\n#{@category_name_id_mapping.inspect}\n\n"
+        print "\n\n#{@entries.inspect}\n\n"
+
+      else
+        redirect_to users_login_url
+      end
+    elsif request.post?
+      
+    end
+  end
+
   private
 
   def set_account_category_info
     if !session[:current_user_id].nil?
       user_id = session[:current_user_id]
       @account_names = AccountsHelper.get_account_names user_id
-      @category_names = CategoriesHelper.get_category_names(user_id, session[:account_name] )
+      @category_names = CategoriesHelper.get_category_names(user_id, session[:account_name])
     end
   end
 

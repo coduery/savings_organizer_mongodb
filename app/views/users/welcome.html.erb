@@ -17,19 +17,24 @@
     <%= form_tag(users_welcome_path) do -%>
 
       <span class="span_left_align">Selected Savings Account:</span>
-      <span class="span_right_align"><%= select_tag "account_name", options_for_select(@account_names, session[:account_name]), onchange: "this.form.submit();" %></span><br><br>
+      <span class="span_right_align"><%= select_tag "account_name", 
+        options_for_select(@account_names, session[:account_name]), onchange: "this.form.submit();" %></span><br><br>
+
+      <span class="span_left_align">Current Savings Amount:</span>
+      <span class="span_right_align">$&nbsp<%= label_tag "savings_amount", number_with_precision(@account_total, precision: 2), class: "display_item" %>
+      </span><br><br>   
 
       <span class="span_left_align">Number of Saving Categories:</span>
       <span class="span_right_align"><%= label_tag "number_categories", @number_of_catagories, class: "display_item" %></span><br><br>
 
-      <span class="span_left_align">Current Savings Amount:</span>
-      <span class="span_right_align"><%= label_tag "savings_amount", nil, class: "display_item" %></span><br><br>    
+      <span class="span_left_align">Number of Entries:</span>
+      <span class="span_right_align"><%= label_tag "number_of_entries", @number_of_entries, class: "display_item" %></span><br><br>      
 
       <span class="span_left_align">Last Entry Date:</span>
-      <span class="span_right_align"><%= label_tag "last_entry_date", nil, class: "display_item" %></span><br><br>
+      <span class="span_right_align"><%= label_tag "last_entry_date", @last_entry_date, class: "display_item" %></span><br><br>
 
-      <span class="span_left_align">Last Entry Amount:</span>
-      <span class="span_right_align"><%= label_tag "last_entry_amount", nil, class: "display_item" %></span><br><br>
+      <span class="span_left_align">Last Total Entry Amount:</span>
+      <span class="span_right_align">$&nbsp<%= label_tag "last_entry_amount", number_with_precision(@last_entry_amount, precision: 2), class: "display_item" %></span><br><br>
 
     <% end -%>
 
