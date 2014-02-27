@@ -59,23 +59,25 @@ class EntriesController < ApplicationController
     end  
   end
 
-  def view
+  def view #TODO: can probably cut down on duplication between get and post conditions below
     if request.get?
       if !session[:current_user_id].nil?
         user_id = session[:current_user_id]
         @account_names = AccountsHelper.get_account_names user_id
         @category_names = CategoriesHelper.get_category_names(user_id, session[:account_name])
-        @entries = EntriesHelper.get_entries(user_id, session[:account_name])
-        @category_name_id_mapping = EntriesHelper.get_category_name_id_mapping(user_id, session[:account_name])
-
-        print "\n\n#{@category_name_id_mapping.inspect}\n\n"
-        print "\n\n#{@entries.inspect}\n\n"
-
+        @consolidated_entries = EntriesHelper.get_consolidated_entries(user_id, session[:account_name])
       else
         redirect_to users_login_url
       end
     elsif request.post?
-      
+      if !session[:current_user_id].nil?
+        user_id = session[:current_user_id]
+        account_name = params[:account_name]
+        session[:account_name] = account_name
+        @account_names = AccountsHelper.get_account_names user_id
+        @category_names = CategoriesHelper.get_category_names(user_id, session[:account_name])
+        @consolidated_entries = EntriesHelper.get_consolidated_entries(user_id, session[:account_name])
+      end
     end
   end
 

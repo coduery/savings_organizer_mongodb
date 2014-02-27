@@ -37,11 +37,18 @@ module EntriesHelper
       category_ids.push(category[:id])
     end
     category_entries = Entry.where("category_id IN (?)" , category_ids).order("entry_date DESC, created_at DESC")
+  end
 
-
+  def self.get_consolidated_entries(user_id, account_name)
+    account_categories = CategoriesHelper.get_categories(user_id, account_name) # TODO: need to get rid of duplication of get_entries above
+    category_ids = Array.new
+    account_categories.each do |category|
+      category_ids.push(category[:id])
+    end
+    category_entries = Entry.where("category_id IN (?)" , category_ids).order("entry_date DESC, created_at DESC")
 
     category_entries_date_set = Array.new
-    category_entries_resorted = Array.new
+    consolidated_date_entries = Array.new
 
     category_name_id_mapping = get_category_name_id_mapping(user_id, account_name).sort
 
@@ -53,41 +60,36 @@ module EntriesHelper
          category_entries[i + 1][:created_at].to_i == category_entries[i][:created_at].to_i - 1)
         next
       else
-        
-        # print "\n\n#{category_entries_date_set.inspect}\n\n"
-
-        for j in 0..(account_categories.size - 1)
-
-          
-
-          category_entries_date_set.each do |entry|
-
-            if entry[:category_id] == category_name_id_mapping[j][1]
-
-              category_entries_resorted.push(entry)
+        compiled_date_entry = Array.new(category_ids.size + 2)
+        j = nil
+        category_entries_date_set.each do |entry|
+          if j.nil?
+            compiled_date_entry[0] = entry[:entry_date].strftime("%-m/%-d/%Y")
+            j = !nil
+          end
+          category_id = entry[:category_id]
+          for k in 0..(category_ids.size - 1)
+            if category_id == category_name_id_mapping[k][1]
+              compiled_date_entry[k + 1] = entry[:entry_amount]
             end
           end
-
         end
-
+        consolidated_date_entries.push(compiled_date_entry)
         category_entries_date_set = Array.new
-
-        # print "\n\n#{category_entries_resorted.inspect}\n\n"
-
-
-
       end
     end
 
-    # print "\n\n"
-    # print category_entries.all.inspect
-    # print "\n\n"
+    consolidated_date_entries.each do |date_entry|
+      date_entries_total = 0
+      for i in 1..(category_ids.size)
+        if !date_entry[i].nil?
+          date_entries_total += date_entry[i]
+        end
+      end
+      date_entry[category_ids.size + 1] = date_entries_total
+    end
 
-    # print category_entries_resorted.inspect
-    # print "\n\n"
-
-    #category_entries
-    category_entries_resorted
+    consolidated_date_entries
   end
 
   def self.get_category_name_id_mapping(user_id, account_name)

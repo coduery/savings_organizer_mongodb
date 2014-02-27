@@ -16,5 +16,6 @@ SavingsOrganizer::Application.routes.draw do
   post "accounts/create"
   post "categories/create"
   post "entries/add"
+  post "entries/view"
 
 end
