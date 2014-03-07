@@ -20,4 +20,12 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            password:
+              blank: "Password cannot be blank!"
+            password_confirmation:
+              confirmation: "Passwords must be identical!"

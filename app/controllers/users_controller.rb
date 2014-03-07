@@ -1,13 +1,15 @@
 class UsersController < ApplicationController
 
-  def login
-    if request.get? # display login page
+  def signin
+    if request.get? # display sign in page
       flash[:alert] = nil
+      session[:current_user_id] = nil
     elsif request.post?
-      username = params[:username]
+      session[:username] = params[:username]
+      username = params[:username].downcase
       user = User.find_by user_name: "#{username}"
-    if !user.nil? && (UsersHelper.authenticate? user, params)
-        flash[:notice] = "Login Successful."
+    if user && user.authenticate(params[:password])
+        flash[:notice] = "Sign in successful."
         session[:current_user_id] = user[:id]
         session[:account_name] = AccountsHelper.get_account_names(user[:id]).first
         redirect_to users_welcome_url
@@ -30,7 +32,7 @@ class UsersController < ApplicationController
     
       if user.valid?
         user.save
-        flash[:notice] = "Registration Successful. Please Login!"
+        flash[:notice] = "Registration Successful. Please Sign In!"
         redirect_to root_url
       else
         flash[:alert] = user.errors.first[1]
@@ -43,7 +45,7 @@ class UsersController < ApplicationController
     if request.get? || request.post?
       if !session[:current_user_id].nil?  # display welcome page
         user_id = session[:current_user_id]
-        @user_name = UsersHelper.get_user_name(user_id)
+        @user_name = session[:username]
         @account_names = AccountsHelper.get_account_names user_id
 
         if session[:account_name].nil? && request.get?
@@ -65,7 +67,7 @@ class UsersController < ApplicationController
         @last_entry_date = last_entry[0]
         @last_entry_amount = last_entry[1]
       else
-        redirect_to users_login_url
+        redirect_to users_signin_url
       end
     end
   end

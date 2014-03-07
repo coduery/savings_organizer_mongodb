@@ -79,6 +79,10 @@ div {
   border: solid 1px black;
 }
 
+.left_align_paragraph {
+  text-align: left;
+}
+
 #main_layout {
   display: inline-block;
   height: 600px;

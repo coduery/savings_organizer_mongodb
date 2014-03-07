@@ -1,8 +1,8 @@
 SavingsOrganizer::Application.routes.draw do
 
-  root "users#login" # specifes default web page for application
+  root "users#signin" # specifes default web page for application
 
-  get "users/login"
+  get "users/signin"
   get "users/registration"
   get "users/welcome"
   get "accounts/create"
@@ -10,7 +10,7 @@ SavingsOrganizer::Application.routes.draw do
   get "entries/add"
   get "entries/view"
 
-  post "users/login"
+  post "users/signin"
   post "users/registration"
   post "users/welcome"
   post "accounts/create"

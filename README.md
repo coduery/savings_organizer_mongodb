@@ -1,28 +1,3 @@
-== README
+This is an Ruby on Rails application that I have been developing for a school project.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+The Savings Organizer application is a tool for individuals who desire to organize their savings account(s) into separate items for which they are saving (e.g. new automobile, medical emergency, tax payment, etc.); thereby, facilitating the documentation and tracking of savings items for different purposes to meet saver's goals.

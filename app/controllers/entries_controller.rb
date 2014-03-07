@@ -11,7 +11,7 @@ class EntriesController < ApplicationController
           flash.now[:alert] = "No Categories for Savings Account!  Must create at least one category."
         end
       else
-        redirect_to users_login_url
+        redirect_to users_signin_url
       end
 
     elsif request.post?
@@ -67,7 +67,7 @@ class EntriesController < ApplicationController
         @category_names = CategoriesHelper.get_category_names(user_id, session[:account_name])
         @consolidated_entries = EntriesHelper.get_consolidated_entries(user_id, session[:account_name])
       else
-        redirect_to users_login_url
+        redirect_to users_signin_url
       end
     elsif request.post?
       if !session[:current_user_id].nil?

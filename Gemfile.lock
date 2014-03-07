@@ -27,6 +27,7 @@ GEM
       tzinfo (~> 0.3.37)
     arel (4.0.1)
     atomic (1.1.14)
+    bcrypt-ruby (3.1.2-x86-mingw32)
     builder (3.1.4)
     capybara (2.1.0)
       mime-types (>= 1.16)
@@ -138,6 +139,7 @@ GEM
     uglifier (2.1.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
+    webrick (1.3.1)
     websocket (1.0.7)
     xpath (2.0.0)
       nokogiri (~> 1.3)
@@ -146,6 +148,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  bcrypt-ruby (= 3.1.2)
   capybara (= 2.1.0)
   coffee-rails (= 4.0.1)
   jbuilder (~> 1.2)
@@ -159,3 +162,4 @@ DEPENDENCIES
   selenium-webdriver (= 2.35.1)
   turbolinks (= 1.1.1)
   uglifier (= 2.1.1)
+  webrick (~> 1.3.1)

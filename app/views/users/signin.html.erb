@@ -1,6 +1,6 @@
-<% provide(:title, "Login") %>
+<% provide(:title, "Sign In") %>
 
-<h2>User Login</h2>
+<h2>User Sign In</h2>
 
 <% if flash[:alert] %>
   <div id="error_notice">
@@ -16,7 +16,7 @@
 
 <div id="main_layout">
 
-  <%= form_tag(users_login_path) do -%>
+  <%= form_tag(users_signin_path) do -%>
     <div id="center_public_layout">
       Username:<br>
       <%= text_field_tag "username", nil, class: "text_field" %><br><br>
@@ -25,8 +25,13 @@
     </div>
 
     <div id="bottom_layout">
-      <%= submit_tag "Login", class: "button" %>
+      <%= submit_tag "Sign In", class: "button" %>
       <button class="button" onclick="location.href='/users/registration'; return false;">Register</button>
     </div>
   <% end -%>
+
+  <br><br>
+  <p class="left_align_paragraph">The Savings Organizer application is a tool for individuals who desire to organize their savings account(s) into separate items for which they are saving (e.g. new automobile, medical emergency, tax payment, etc.); thereby, facilitating the documentation and tracking of savings items for different purposes to meet saver's goals.</p>
+  <p class="left_align_paragraph">Please sign in or register to create a new user account.</p>
+ 
 </div>

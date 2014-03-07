@@ -11,7 +11,7 @@ class CategoriesController < ApplicationController
         @account_names = AccountsHelper.get_account_names user_id
         @category_name = nil
       else
-        redirect_to users_login_url
+        redirect_to users_signin_url
       end
 
     elsif request.post?

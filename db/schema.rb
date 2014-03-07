@@ -41,11 +41,13 @@ ActiveRecord::Schema.define(version: 20140218033720) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "user_name",  null: false
-    t.string   "password",   null: false
-    t.string   "user_email", null: false
+    t.string   "user_name",       null: false
+    t.string   "password_digest", null: false
+    t.string   "user_email",      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "users", ["user_name"], name: "index_users_on_user_name", unique: true, using: :btree
 
 end

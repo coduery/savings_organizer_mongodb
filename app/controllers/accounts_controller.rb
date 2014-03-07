@@ -5,7 +5,7 @@ class AccountsController < ApplicationController
       if !session[:current_user_id].nil?
         # display create account page
       else
-        redirect_to users_login_url
+        redirect_to users_signin_url
       end
     elsif request.post?
       user_id = session[:current_user_id]

@@ -3,8 +3,9 @@ source 'https://rubygems.org'
 ruby '1.9.3'
 
 gem 'rails', '4.0.2'
-
+gem 'webrick', '~> 1.3.1'
 gem 'pg', '0.15.1'
+gem 'bcrypt-ruby', '3.1.2'
 
 group :development, :test do
   gem 'rspec-rails', '2.13.1'
