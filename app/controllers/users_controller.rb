@@ -1,7 +1,9 @@
+# Class for controlling actions related to "users" web page views
 class UsersController < ApplicationController
 
+  # Method for handling get and post actions for "signin" web page
   def signin
-    if request.get? # display sign in page
+    if request.get?
       flash[:alert] = nil
       session[:current_user_id] = nil
     elsif request.post?
@@ -11,7 +13,8 @@ class UsersController < ApplicationController
     if user && user.authenticate(params[:password])
         flash[:notice] = "Sign in successful."
         session[:current_user_id] = user[:id]
-        session[:account_name] = AccountsHelper.get_account_names(user[:id]).first
+        session[:account_name] = 
+          AccountsHelper.get_account_names(user[:id]).first
         redirect_to users_welcome_url
       else
         flash[:alert] = "Credentials Invalid. Please try again!"
@@ -20,16 +23,12 @@ class UsersController < ApplicationController
     end
   end
 
+  # Method for handling get and post actions for "registration" web page
   def registration
-  	if request.get? # display registration page
+  	if request.get?
       flash[:alert] = nil
 	  elsif request.post?
-
-      user = User.new(:user_name             => params[:user_name],
-                      :password              => params[:password],
-                      :password_confirmation => params[:password_confirmation],
-                      :user_email            => params[:user_email])
-    
+      user = User.new(user_params)
       if user.valid?
         user.save
         flash[:notice] = "Registration Successful. Please Sign In!"
@@ -41,9 +40,10 @@ class UsersController < ApplicationController
   	end	
   end
 
+  # Method for handling get and post actions for "welcome" web page
   def welcome
     if request.get? || request.post?
-      if !session[:current_user_id].nil?  # display welcome page
+      if !session[:current_user_id].nil?
         user_id = session[:current_user_id]
         @user_name = session[:username]
         @account_names = AccountsHelper.get_account_names user_id
@@ -71,5 +71,13 @@ class UsersController < ApplicationController
       end
     end
   end
+
+  private
+
+    # Method for retrieving registration form data via strong parameters
+    def user_params
+      params.require(:user).permit(:user_name, :password, 
+                                   :password_confirmation, :user_email)
+    end
 
 end

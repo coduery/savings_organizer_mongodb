@@ -1,3 +1,4 @@
+<%# Web page for adding an entry to a savings category %>
 <% provide(:title, "Add Entry") %>
 
 <h2>Add Savings Entry</h2>
@@ -20,14 +21,14 @@
 
   <div id="center_private_layout">
 
-    <%= form_tag(entries_add_path) do -%>
+    <%= form_for :entry, url: entries_add_path do |f| %>
 
       <span class="span_left_align">* Selected Savings Account:</span>
-      <span class="span_right_align"><%= select_tag "account_name", 
+      <span class="span_right_align"><%= f.select :account_name, 
         options_for_select(@account_names, session[:account_name]), onchange: "this.form.submit();" %></span><br><br>
 
       <span class="span_left_align">* Entry Date:</span>
-      <span class="span_right_align"><%= date_select :entry_date, :date_components, 
+      <span class="span_right_align"><%= f.date_select :entry_date, 
         { start_year: Time.now.getlocal.year - 1, end_year: Time.now.getlocal.year + 1, use_short_month: true, order: [:month, :day, :year],
           default: { :month => Time.now.getlocal.month, :day => Time.now.getlocal.day, :year => Time.now.getlocal.year } } %>
       </span><br><br>
@@ -37,7 +38,9 @@
       <% if !@category_names.empty? %>
         <% @category_names.each do |category| %>
           <span class="span_left_align"><%= category %></span>
-          <span class="span_right_align">$ <%= text_field_tag "#{category}", nil, class: "dollar_text_field", onkeyup: "addEntries(#{@category_names})" %></span><br><br>
+          <span class="span_right_align">
+            $ <%= f.text_field "#{category.to_sym}", value: nil, onkeyup: "addEntries(#{@category_names})", class: "dollar_text_field" %>
+          </span><br><br>
         <% end %>
       <% elsif %>
         <span class="span_left_align" id="highlight_text" >No Categories in Account!</span><br><br>
@@ -48,10 +51,10 @@
 
       <div id="bottom_layout">
         <span class="span_left_align">* - Required Entry</span>
-        <span class="span_right_align"><%= submit_tag "Submit", class: "button" %></span>
+        <span class="span_right_align"><%= f.submit "Submit", class: "button" %></span>
       </div>
 
-    <% end -%>
+    <% end %>
 
   </div>
 

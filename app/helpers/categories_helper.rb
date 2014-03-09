@@ -1,9 +1,9 @@
 module CategoriesHelper
 
   def self.is_date_valid?(params)
-    !(params[:savings_goal_date]["date_components(1i)"]).blank? &&
-    !(params[:savings_goal_date]["date_components(2i)"]).blank? &&
-    !(params[:savings_goal_date]["date_components(3i)"]).blank?
+    !(params["savings_goal_date(1i)"]).blank? &&
+    !(params["savings_goal_date(2i)"]).blank? &&
+    !(params["savings_goal_date(3i)"]).blank?
   end
 
   def self.is_goal_entry_valid?(params, date_valid)

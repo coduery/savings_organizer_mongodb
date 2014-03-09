@@ -1,3 +1,4 @@
+<%# Web page for welcoming the signed in user %>
 <% provide(:title, "Welcome") %>
 
 <h2>Welcome <%= @user_name %>!</h2>
@@ -14,7 +15,7 @@
 
   <div id="center_private_layout">
 
-    <%= form_tag(users_welcome_path) do -%>
+    <%= form_tag(users_welcome_path) do %>
 
       <span class="span_left_align">Selected Savings Account:</span>
       <span class="span_right_align"><%= select_tag "account_name", 
@@ -36,7 +37,7 @@
       <span class="span_left_align">Last Total Entry Amount:</span>
       <span class="span_right_align">$&nbsp<%= label_tag "last_entry_amount", number_with_precision(@last_entry_amount, precision: 2), class: "display_item" %></span><br><br>
 
-    <% end -%>
+    <% end %>
 
   </div>
 </div>

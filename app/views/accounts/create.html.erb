@@ -1,3 +1,4 @@
+<%# Web page for savings account creation %>
 <% provide(:title, "Create Account") %>
 
 <h2>Create Savings Account</h2>
@@ -20,16 +21,17 @@
 
   <div id="center_private_layout">
 
-    <%= form_tag(accounts_create_path) do -%>
+    <%= form_for :account, url: accounts_create_path do |f| %>
       <div id="center_public_layout">
         * Account Name:<br>
-        <%= text_field_tag "account_name", nil, class: "text_field" %><br><br>
+        <%= f.text_field :account_name, value: nil, class: "text_field" %><br><br>
       </div>
 
       <div id="bottom_layout">
         <span class="span_left_align">* - Required Entry</span>
-        <span class="span_right_align"><%= submit_tag "Submit", class: "button" %></span>
+        <span class="span_right_align"><%= f.submit "Submit", class: "button" %></span>
       </div>
-    <% end -%>
+    <% end %>
+
   </div>
 </div>

@@ -1,3 +1,4 @@
+<%# Web page for user registration %>
 <% provide(:title, "Registration") %>
 
 <h2>New User Registration</h2>
@@ -10,21 +11,21 @@
 
 <div id="main_layout">
 
-  <%= form_tag(users_registration_path) do -%>
+  <%= form_for :user, url: users_registration_path do |f| %>
     <div id="center_public_layout">
         New Username:<br>
-        <%= text_field_tag :user_name, nil, class: "text_field" %><br><br>
+        <%= f.text_field :user_name, value: nil, class: "text_field" %><br><br>
         Password:<br>
-        <%= password_field_tag :password, nil, class: "text_field" %><br><br>
+        <%= f.password_field :password, value: nil, class: "text_field" %><br><br>
         Confirm Password:<br>
-        <%= password_field_tag :password_confirmation, nil, class: "text_field" %><br><br>
+        <%= f.password_field :password_confirmation, value: nil, class: "text_field" %><br><br>
         Email Address:<br>
-        <%= text_field_tag :user_email, nil, class: "text_field" %><br><br><br>
+        <%= f.text_field :user_email, value: nil, class: "text_field" %><br><br><br>
     </div>
 
     <div id="bottom_layout">
-      <%= submit_tag "Submit", class: "button" %>
-      <button class="button" onclick="location.href='/users/signin'; return false;">Cancel</button>
+      <%= f.submit "Submit", class: "button" %>
+      <button class="button" onclick="location.href='<%= users_signin_path%>'; return false;">Cancel</button>
     </div>
-  <% end -%>
+  <% end %>
 </div>

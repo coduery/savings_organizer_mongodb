@@ -5,7 +5,7 @@ function addEntries(categoryNames) {
 
   for (var i = 0; i < categoryNames.length; i++) {
     var categoryName = categoryNames[i];
-    categoryName = categoryName.replace(/ /g, "_");
+    categoryName = "entry_" + categoryName;
     entryAmount = document.getElementById(categoryName).value;
     if (isNaN(entryAmount)) {
       alert("\"" + entryAmount + "\" is not a valid number entry!");

@@ -1,36 +1,35 @@
+# Class for controlling actions related to "entries" web page views
 class EntriesController < ApplicationController
 
-  attr_reader :account_names, :category_names
-
+  # Method for handling get and post actions for entries "add" web page
   def add
-    if request.get? # display add entry page
-
+    if request.get?
       if !session[:current_user_id].nil?
-        set_account_category_info
+        get_account_category_info
         if @category_names.empty?
           flash.now[:alert] = "No Categories for Savings Account!  Must create at least one category."
         end
       else
         redirect_to users_signin_url
       end
-
     elsif request.post?
-      if params[:account_name] == session[:account_name]
-        set_account_category_info
+      get_account_category_info
+      entry_attributes = entry_params
+      if entry_attributes[:account_name] == session[:account_name]
         if !@category_names.empty?
           save_entries = nil
           entries = Array.new
 
           @category_names.each do |category_name|
-            param_string = "#{category_name}"
-            param_symbol = param_string.to_sym
-            if !params[param_symbol].blank? && params[param_symbol] != 0
-              category_id = CategoriesHelper.get_category_id(session[:current_user_id], params[:account_name], param_string)
-              entry_date = Date.civil(params[:entry_date]["date_components(1i)"].to_i,
-                                      params[:entry_date]["date_components(2i)"].to_i,
-                                      params[:entry_date]["date_components(3i)"].to_i)
+            attribute_string = "#{category_name}"
+            attribute_symbol = attribute_string.to_sym
+            if !entry_attributes[attribute_symbol].blank? && entry_attributes[attribute_symbol] != 0
+              category_id = CategoriesHelper.get_category_id(session[:current_user_id], entry_attributes[:account_name], attribute_string)
+              entry_date = Date.civil(entry_attributes["entry_date(1i)"].to_i,
+                                      entry_attributes["entry_date(2i)"].to_i,
+                                      entry_attributes["entry_date(3i)"].to_i)
               entry = Entry.new(:entry_date   => entry_date,
-                                :entry_amount => params[param_symbol],
+                                :entry_amount => entry_attributes[attribute_symbol],
                                 :category_id  => category_id)
               if entry.valid?
                 entries.push(entry)
@@ -53,12 +52,13 @@ class EntriesController < ApplicationController
           end
         end
       else 
-        session[:account_name] = params[:account_name]
+        session[:account_name] = entry_attributes[:account_name]
         redirect_to entries_add_url
       end
     end  
   end
 
+  # Method for handling get and post actions for entries "view" web page
   def view #TODO: can probably cut down on duplication between get and post conditions below
     if request.get?
       if !session[:current_user_id].nil?
@@ -83,12 +83,22 @@ class EntriesController < ApplicationController
 
   private
 
-  def set_account_category_info
-    if !session[:current_user_id].nil?
-      user_id = session[:current_user_id]
-      @account_names = AccountsHelper.get_account_names user_id
-      @category_names = CategoriesHelper.get_category_names(user_id, session[:account_name])
+    # Method for getting account and category information for user
+    def get_account_category_info
+      if !session[:current_user_id].nil?
+        user_id = session[:current_user_id]
+        @account_names = AccountsHelper.get_account_names user_id
+        @category_names = CategoriesHelper.get_category_names(user_id, session[:account_name])
+      end
     end
-  end
+
+    # Method for retrieving entry form data via strong parameters
+    def entry_params
+      params_allowed = [:account_name, :entry_date]
+      @category_names.each do |category_name|
+        params_allowed.push(category_name.to_sym)
+      end
+      params.require(:entry).permit(params_allowed)
+    end
 
 end
