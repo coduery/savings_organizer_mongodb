@@ -33,7 +33,7 @@ $( document ).ready(function() {
   if (numberCategories < 4) {
     tableWidth = 214 + 106 * numberCategories;
   } else {
-    tableWidth = 638
+    tableWidth = 638;
   }
   $('#entries_table').css( "width", tableWidth.toString() + "px" );
 });
