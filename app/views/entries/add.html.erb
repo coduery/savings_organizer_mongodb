@@ -25,7 +25,7 @@
 
       <span class="span_left_align">* Selected Savings Account:</span>
       <span class="span_right_align"><%= f.select :account_name, 
-        options_for_select(@account_names, session[:account_name]), onchange: "this.form.submit();" %></span><br><br>
+        options_for_select(@account_names, session[:account_name]), {}, onchange: "this.form.submit();" %></span><br><br>
 
       <span class="span_left_align">* Entry Date:</span>
       <span class="span_right_align"><%= f.date_select :entry_date, 

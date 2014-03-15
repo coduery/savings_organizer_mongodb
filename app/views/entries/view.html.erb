@@ -28,31 +28,35 @@
 
       <% if !@category_names.empty? %>
 
-        <table class="entries_table">
-          <tr>
-            <th class="entries_columns">Date</th>
-            <% @category_names.each do |category_name| %>
-              <th class="entries_columns"><%= category_name %></th>
-            <% end %>
-            <th class="entries_columns">Total</th>
-          </tr>
+        <div id="entries_table" data-number_categories="<%= @category_names.size %>">
 
-          <% if !@consolidated_entries.empty? %>
-            <% @consolidated_entries.each do |consolidated_entry| %>
-              <tr>
-                <td><%= consolidated_entry[0] %></td>
-                <% for i in 1..@category_names.size %>
-                  <% if !consolidated_entry[i].nil? %>
-                    <td><span class="span_right_align_table">$&nbsp<%= number_with_precision(consolidated_entry[i], precision: 2) %></span></td>
-                  <% else %>
-                    <td><span class="span_right_align_table">-</span></td>
+          <table>
+            <tr>
+              <th class="entries_columns">Date</th>
+              <% @category_names.each do |category_name| %>
+                <th class="entries_columns"><%= category_name %></th>
+              <% end %>
+              <th class="entries_columns">Total</th>
+            </tr>
+
+            <% if !@consolidated_entries.empty? %>
+              <% @consolidated_entries.each do |consolidated_entry| %>
+                <tr>
+                  <td><%= consolidated_entry[0] %></td>
+                  <% for i in 1..@category_names.size %>
+                    <% if !consolidated_entry[i].nil? %>
+                      <td><span class="span_right_align_table">$&nbsp<%= number_with_precision(consolidated_entry[i], precision: 2) %></span></td>
+                    <% else %>
+                      <td><span class="span_right_align_table">-</span></td>
+                    <% end %>
                   <% end %>
-                <% end %>
-                <td><span class="span_right_align_table">$&nbsp<%= number_with_precision(consolidated_entry[-1], precision: 2) %></span></td>
-              </tr>
+                  <td><span class="span_right_align_table">$&nbsp<%= number_with_precision(consolidated_entry[-1], precision: 2) %></span></td>
+                </tr>
+              <% end %>
             <% end %>
-          <% end %>
-        </table>
+          </table>
+
+        </div>
 
         <% if @consolidated_entries.empty? %>
           <span class="span_left_align" id="error_notice">No Entries have been added to account categories!</span>

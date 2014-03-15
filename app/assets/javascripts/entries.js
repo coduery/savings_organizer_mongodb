@@ -1,3 +1,4 @@
+// JavaScript funcntion to dyanmically add savings entries
 function addEntries(categoryNames) {
   
   var total = new Number(0);
@@ -24,3 +25,15 @@ function addEntries(categoryNames) {
   total = total.toFixed(2); 
   document.getElementById("entry_total").innerHTML = total;
 }
+
+// jQuery function adjust the size the Savings Entries Table
+$( document ).ready(function() {
+  var numberCategories = new Number($('#entries_table').data('number_categories'));
+  var tableWidth;
+  if (numberCategories < 4) {
+    tableWidth = 214 + 106 * numberCategories;
+  } else {
+    tableWidth = 638
+  }
+  $('#entries_table').css( "width", tableWidth.toString() + "px" );
+});

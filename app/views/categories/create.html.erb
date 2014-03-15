@@ -24,7 +24,9 @@
     <%= form_for :category, url: categories_create_path do |f| %>
 
       <span class="span_left_align">* Selected Savings Account:</span>
-      <span class="span_right_align"><%= f.select :account_name, options_for_select(@account_names, session[:account_name]) %></span><br><br>
+      <span class="span_right_align"><%= f.select :account_name, options_for_select(@account_names, session[:account_name]), 
+                                                  {}, onchange: "this.form.submit();" %>
+      </span><br><br>
 
       <span class="span_left_align">* Category Name:</span>
       <span class="span_right_align"><%= f.text_field :category_name, value: @category_name, class: "text_field" %></span><br><br>
