@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       session[:username] = params[:username]
       username = params[:username].downcase
       user = User.find_by user_name: "#{username}"
-    if user && user.authenticate(params[:password])
+      if user && user.authenticate(params[:password])
         flash[:notice] = "Sign in successful."
         session[:current_user_id] = user[:id]
         session[:account_name] = 

@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
     self.user_email = user_email.downcase
   end
 
-  has_many :accounts
+  has_many :accounts # can add dependent: :destroy to automatically delete accounts when user is destroyed
 
   validates :user_name, 
     presence:   { message: "Username not valid. Please try again!" },

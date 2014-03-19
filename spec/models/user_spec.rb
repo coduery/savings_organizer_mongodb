@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe User do
 
-  before do
+  before :each do
     @user = User.new(user_name: "test_user", password: "test_pw", 
                      password_confirmation: "test_pw", user_email: "test@test.com")
   end
@@ -87,6 +87,5 @@ describe User do
       specify { expect(user_invalid_password).to be_false }
     end
   end
-
 
 end
