@@ -4,11 +4,14 @@ ruby '1.9.3'
 
 gem 'rails', '4.0.2'
 gem 'webrick', '~> 1.3.1'
-gem 'pg', '0.15.1'
 gem 'bcrypt-ruby', '3.1.2'
+
+gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git'
+gem 'bson_ext'
 
 group :development, :test do
   gem 'rspec-rails', '2.13.1'
+  gem 'database_cleaner'
 end
 
 group :test do

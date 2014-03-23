@@ -1,4 +1,13 @@
-class User < ActiveRecord::Base
+class User
+  
+  include Mongoid::Document
+  include Mongoid::Timestamps::Created
+  include Mongoid::Timestamps::Updated
+  include ActiveModel::SecurePassword
+  
+  field :user_name,       type: String
+  field :password_digest, type: String
+  field :user_email,      type: String  
 
   before_save do
     self.user_name = user_name.downcase

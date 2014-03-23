@@ -1,8 +1,8 @@
 module AccountsHelper
 
   def self.get_account_id(user_id, account_name)
-    user_accounts = Account.where("user_id = ? AND account_name = ?", 
-                                   user_id, account_name)
+    user_accounts = Account.where(user_id: user_id, 
+                                  account_name: account_name)
     if !user_accounts.empty?
       account = user_accounts.first
       account_id = account[:id]
@@ -12,9 +12,8 @@ module AccountsHelper
   end
 
   def self.get_account_names(user_id)
-
     account_names = Array.new
-    user_accounts = Account.where("user_id = ?", user_id)
+    user_accounts = Account.where(user_id: user_id)
 
     if !user_accounts.empty?
       user_accounts.each do |account|
@@ -27,8 +26,7 @@ module AccountsHelper
   end
 
   def self.does_account_exist?(user_id, account_name)
-    user_accounts = Account.where("user_id = ? AND account_name = ?", 
-                                   user_id, account_name)
+    user_accounts = Account.where(user_id: user_id, account_name: account_name)
     !user_accounts.empty?
   end
 

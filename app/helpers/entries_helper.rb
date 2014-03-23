@@ -36,7 +36,7 @@ module EntriesHelper
     account_categories.each do |category|
       category_ids.push(category[:id])
     end
-    category_entries = Entry.where("category_id IN (?)" , category_ids).order("entry_date DESC, created_at DESC")
+    category_entries = Entry.where(:category_id.in => category_ids).order_by(entry_date: :desc, created_at: :desc)
   end
 
   def self.get_consolidated_entries(user_id, account_name)
@@ -45,7 +45,7 @@ module EntriesHelper
     account_categories.each do |category|
       category_ids.push(category[:id])
     end
-    category_entries = Entry.where("category_id IN (?)" , category_ids).order("entry_date DESC, created_at DESC")
+    category_entries = Entry.where(:category_id.in => category_ids).order_by(entry_date: :desc, created_at: :desc)
 
     category_entries_date_set = Array.new
     consolidated_date_entries = Array.new

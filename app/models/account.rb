@@ -1,4 +1,11 @@
-class Account < ActiveRecord::Base
+class Account
+
+  include Mongoid::Document
+  include Mongoid::Timestamps::Created
+  include Mongoid::Timestamps::Updated
+  
+  field :account_name, type: String
+  field :user_id,      type: Integer
 
   belongs_to :user
   has_many :categories
