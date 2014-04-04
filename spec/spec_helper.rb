@@ -41,6 +41,9 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
   
+  # Include Capybara 
+  config.include Capybara::DSL
+  
   # Blocks below added to cleanup mongodb test database
   # See http://procbits.com/2011/08/18/using-mongoid-with-rspec
   # and https://github.com/bmabey/database_cleaner
