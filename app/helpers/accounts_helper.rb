@@ -20,8 +20,6 @@ module AccountsHelper
         account_names.push(account[:account_name])
       end       
       account_names.sort!
-    else
-      account_names.push("No Accounts")
     end
   end
 
